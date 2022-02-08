@@ -1,26 +1,18 @@
-# from django.urls import path
-from .views import StudentViewSet, CourseViewSet
-from rest_framework.routers import DefaultRouter
+from django.urls import path
+from . import views
 
-router = DefaultRouter()
-router.register(r'students', StudentViewSet, basename='student')
-router.register(r'courses', CourseViewSet, basename='course')
-urlpatterns = router.urls
-
-# Manual Routing
-# urlpatterns = [
-#     # Student routes
-#     path('students', views.all_students, name='all_students'),
-#     path('students/new', views.new_student, name='new_student'),
-#     path('students/<int:student_id>', views.detail_student, name='detail_student'),
-#     path('students/<int:student_id>/edit', views.edit_student, name='edit_student'),
-#     path('students/<int:student_id>/delete', views.delete_student, name='delete_student'),
-#     # Course routes
-#     path('courses', views.all_courses, name='all_courses'),
-#     path('courses/new', views.new_course, name='new_course'),
-#     path('courses/<int:course_id>', views.detail_course, name='detail_course'),
-#     path('courses/<int:course_id>/enroll-student/<int:student_id>', views.enroll_student, name='enroll_student'),
-#     path('courses/<int:course_id>/drop-student/<int:student_id>', views.drop_student, name='drop_student'),
-#     path('courses/<int:course_id>/edit', views.edit_course, name='edit_course'),
-#     path('courses/<int:course_id>/delete', views.delete_course, name='delete_course'),
-# ]
+urlpatterns = [
+    path('', views.api_overview, name='api_overview'),
+    
+    path('students/list/', views.student_list, name='student_list'),
+    path('students/detail/<int:student_id>/', views.student_detail, name='student_detail'),
+    path('students/create/', views.student_create, name='student_create'),
+    path('students/update/<int:student_id>/', views.student_update, name='student_update'),
+    path('students/delete/<int:student_id>/', views.student_delete, name='student_delete'),
+    
+    path('courses/list/', views.course_list, name='course_list'),
+    path('courses/detail/<int:courses_id>/', views.course_detail, name='course_detail'),
+    path('courses/create/', views.course_create, name='course_create'),
+    path('courses/update/<int:courses_id>/', views.course_update, name='course_update'),
+    path('courses/delete/<int:courses_id>/', views.course_delete, name='course_delete'),
+]

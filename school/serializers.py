@@ -1,18 +1,18 @@
 # from builtins import object
 from rest_framework import serializers
 from .models import Student, Course
-
-class StudentSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Student
-        fields = ['id', 'first_name', 'last_name', 'courses']
-        depth = 1
         
 class CourseSerializer(serializers.ModelSerializer):
-    # students = StudentSerializer(many=True, read_only=True)
     class Meta:
         model = Course
-        fields = ['id', 'course_id', 'course_name', 'students']
+        fields = '__all__'
+        depth = 1
+        
+class StudentSerializer(serializers.ModelSerializer):
+    courses = CourseSerializer(many=True)
+    class Meta:
+        model = Student
+        fields = '__all__'
         depth = 1
 
 
