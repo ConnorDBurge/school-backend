@@ -6,6 +6,8 @@ from .models import Student, Course
 @api_view(['GET'])
 def api_overview(request): # this method just returns an overview of the API routes
     api_urls = {
+        'Prod API End Point': 'https://school-backend-v1.herokuapp.com/school/',
+        'Dev API End Point': 'http://localhost:8000/school/',
         # Student Model Routes
         'Student List': 'students/list/',
         'Student Detail View': 'students/detail/<int:student_id>/',
