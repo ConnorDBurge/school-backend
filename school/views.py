@@ -41,6 +41,8 @@ def student_list(request):
 @api_view(['POST'])
 def student_create(request):
     serializer = StudentSerializer(data=request.data)
+    print(serializer.is_valid())
+    print(serializer.errors)
     if serializer.is_valid():
         serializer.save()
     return Response(serializer.data)
@@ -59,7 +61,7 @@ def student_update(request, student_id):
     serializer = StudentSerializer(data=request.data, instance=student)
     if serializer.is_valid():
         serializer.save()
-    return Response(serializer.data)
+        return Response(serializer.data)    
 
 # Delete
 @api_view(['DELETE'])
@@ -85,7 +87,7 @@ def course_create(request):
     serializer = CourseSerializer(data=request.data)
     if serializer.is_valid():
         serializer.save()
-    return Response(serializer.data)
+        return Response(serializer.data)
 
 # Read
 @api_view(['GET'])
@@ -101,7 +103,7 @@ def course_update(request, course_id):
     serializer = CourseSerializer(data=request.data, instance=course)
     if serializer.is_valid():
         serializer.save()
-    return Response(serializer.data)
+        return Response(serializer.data)
 
 # Delete
 @api_view(['DELETE'])

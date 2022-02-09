@@ -4,12 +4,11 @@ from .models import Student, Course
 class CourseSerializer(serializers.ModelSerializer):
     class Meta:
         model = Course
-        fields = '__all__'
+        fields = ['id', 'course_id', 'course_name', 'students']
         depth = 1
         
 class StudentSerializer(serializers.ModelSerializer):
-    courses = CourseSerializer(many=True)
     class Meta:
         model = Student
-        fields = '__all__'
+        fields = ['id', 'first_name', 'last_name', 'courses']
         depth = 1

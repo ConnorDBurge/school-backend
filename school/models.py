@@ -14,3 +14,5 @@ class Course(models.Model):
     
     def __str__(self):
         return f'{self.course_id}: {self.course_name}'
+
+
