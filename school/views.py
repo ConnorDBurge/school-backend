@@ -23,6 +23,8 @@ def api_overview(request): # this method just returns an overview of the API rou
         # Many-To-Many Relationship Routes Between the Course and Student Models
         'Enroll Student in Course': 'students/enroll/<int:student_id>/<int:course_id>/',
         'Drop Student from Course': 'students/drop/<int:student_id>/<int:course_id>/',
+        'List All Courses for a Student': 'students/<int:student_id>/courses',
+        'List All Students for a Course': 'courses/<int:course_id>/students'
     }
     return Response(api_urls)
 
@@ -131,3 +133,17 @@ def drop_course(request, student_id, course_id):
     course = Course.objects.get(id=course_id)
     student.courses.remove(course)
     return Response({'message': f'{student.first_name} {student.last_name} dropped from {course.course_id}'})
+
+@api_view(['GET'])
+def student_courses(request, student_id):
+    student = Student.objects.get(id=student_id)
+    courses = student.courses.all()
+    serializer = CourseSerializer(courses, many=True)
+    return Response(serializer.data)
+
+@api_view(['GET'])
+def course_students(request, course_id):
+    course = Course.objects.get(id=course_id)
+    students = course.students.all()
+    serializer = StudentSerializer(students, many=True)
+    return Response(serializer.data)

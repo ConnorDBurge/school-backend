@@ -26,4 +26,6 @@ urlpatterns = [
     # Many To Many Relationship Routes Between the Course and Student Models
     path('students/enroll/<int:student_id>/<int:course_id>/', views.enroll_course, name='enroll_course'),
     path('students/drop/<int:student_id>/<int:course_id>/', views.drop_course, name='enroll_course'),
+    path('students/<int:student_id>/courses', views.student_courses, name='student_courses'),
+    path('courses/<int:course_id>/students', views.course_students, name='course_students'),
 ]
