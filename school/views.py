@@ -121,6 +121,7 @@ def course_delete(request, course_id):
 # Create Relationship
 @api_view(['POST'])
 def enroll_course(request, student_id, course_id):
+    print(student_id, course_id)
     student = Student.objects.get(id=student_id)
     course = Course.objects.get(id=course_id)
     student.courses.add(course)
